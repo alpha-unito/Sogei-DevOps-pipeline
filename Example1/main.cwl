@@ -17,17 +17,3 @@ steps:
         in: 
             message: message
         out: []
-
-
-
-# class: CommandLineTool
-
-# baseCommand: echo
-
-
-# inputs:
-#   message:
-#     type: string
-#     inputBinding:
-#       position: 1
-# outputs: []
