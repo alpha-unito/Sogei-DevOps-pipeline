@@ -9,9 +9,9 @@ workflows:
     bindings:
       - step: /step1
         target: 
-          deployment: sogei-onprem
+          deployment: sogei
 deployments:
-  sogei-onprem:
+  sogei:
     type: ssh
     config:
       nodes:      

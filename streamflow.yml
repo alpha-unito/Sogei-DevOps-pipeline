@@ -1,2 +1,19 @@
 #!/usr/bin/env streamflow
 version: v1.0
+workflows:
+  master:
+    type: cwl
+    config:
+      file: main.cwl
+      settings: job.yml
+    bindings:
+      - step: /step1
+        target: 
+          deployment: sogei-onprem
+deployments:
+  sogei-onprem:
+    type: ssh
+    config:
+      nodes:      
+        -                             #IP- obligatorio
+      username:                       # opzionale
