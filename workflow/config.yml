@@ -1,0 +1,6 @@
+dataset:
+  class: Directory
+  path: #path to the dataset
+dataset_private:
+  class: Directory
+  path: #path to the private dataset
