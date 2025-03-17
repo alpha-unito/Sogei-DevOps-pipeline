@@ -31,7 +31,7 @@ inputs:
             position: 5
             prefix: --optimizer
     batch_size:
-        type: int
+        type: int[]
         inputBinding:
             position: 6
             prefix: --batch-size
@@ -51,7 +51,7 @@ inputs:
             position: 9
             prefix: --l2-egulator
 outputs:
-  autotuned_models:
-    type: Directory
-    outputBinding:
-      glob: "training_*/autotuned_models/*"
+    autotuned_models:
+        type: Directory
+        outputBinding:
+            glob: "training_*/autotuned_models/*"

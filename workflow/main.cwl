@@ -5,6 +5,7 @@ requirements:
     SubworkflowFeatureRequirement: {}
 inputs:
     dataset: Directory
+    dataset_private: Directory
     learning_rate: File #Valore: Costante, Esponenziale decrescente, Lambda function
     optimizer: File  #valore: SGD, Adam
     batch_size: int[]
@@ -13,9 +14,9 @@ inputs:
     l2_egulator: float[]
     epochs: int[]
 outputs:
-    result: 
+    postprocessed_dataset: 
         type: Directory
-        outputSource: private_workflow/result
+        outputSource: post_processing_step/postrocessed_private_dataset
 steps:
     preprocessing_azure:
         run: clt/preprocess.cwl
@@ -25,7 +26,8 @@ steps:
     autotuning_unito:
         run: clt/scatter_tuning_unito.cwl
         in:
-            preprocessed_dataset: preprocessed-dataset
+            preprocessed_dataset: 
+                source: preprocessing_azure/preprocessed_dataset
             learning_rate: learning_rate
             optimizer: optimizer
             batch_size: batch_size
@@ -40,27 +42,15 @@ steps:
                 outputSource: autotuning_unito/autotuned_models
         scatter: batch_size
     private_workflow:
-        run:
-            class: Workflow
-            requirements: 
-                StepInputExpressionRequirement: {}
-            inputs:
-                 dataset: Directory
-            outputs:
-                result:
-                    type: Directory []
-                    outputSource: post_processing/ #missing the last data name
-            steps:
-                data_preprocessing:
-                    run: clt/preprocess_private.cwl
-                    in:
-                        dataset_private: dataset_private    #not sure it is correct
-                    out: [preprocessed_private_dataset]
-                scatter_fine_tuning:
-                    run: scatter_tuning.cwl
-                    in:
-                    out:
-
-                model_selection:
-                post_processing:
-              
+        run: clt/private.cwl
+        in:
+            dataset_private: dataset_private
+            autotuned_models:
+                source: autotuning_unito/autotuned_models
+        out: [autotuned_models_private]
+    post_processing_step:
+        run: clt/post_process.cwl
+        in:
+            autotuned_models_private: 
+                source: private_workflow/autotuned_models_private  #not sure it is correct
+        out: [postrocessed_private_dataset]

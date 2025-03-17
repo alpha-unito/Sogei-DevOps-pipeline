@@ -6,12 +6,16 @@ requirements:
     StepInputExpressionRequirement: {}
     SubworkflowFeatureRequirement: {}
 inputs:
-    preprocessed-datasets: Directory
-    models: Directory  #not sure
-
+    preprocessed_private_dataset: Directory
+    autotuned_models: autotuned_models
+       # source: autotuning_unito/autotuned_models
 outputs:
-    model_training_results:
-    type: Directory
+    autotuned_models_private:
+        type: Directory
 steps:
-    scatter_models:
-    training:
+    train_models:
+        run: train_private.cwl
+        in:
+            preprocessed_private_dataset: preprocessed_private_dataset
+            autotuned_models: autotuned_models
+        out: [autotuned_models_private]
