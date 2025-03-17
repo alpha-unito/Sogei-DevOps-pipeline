@@ -14,9 +14,9 @@ inputs:
     l2_egulator: float[]
     epochs: int[]
 outputs:
-    postprocessed_dataset: 
+    postprocessed_private_model: 
         type: Directory
-        outputSource: post_processing_step/postrocessed_private_dataset
+        outputSource: post_processing_step/postprocessed_private_model
 steps:
     preprocessing_azure:
         run: clt/preprocess.cwl
@@ -53,4 +53,4 @@ steps:
         in:
             autotuned_models_private: 
                 source: private_workflow/autotuned_models_private  #not sure it is correct
-        out: [postrocessed_private_dataset]
+        out: [postprocessed_private_model]

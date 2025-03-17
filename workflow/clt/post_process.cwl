@@ -8,7 +8,7 @@ inputs:
     inputBinding:  #binding if necessary
       position: 1
 outputs:
-  postrocessed_private_dataset:
+  postprocessed_private_model:
     type: Directory
     outputBinding:
       glob: "$(runtime.outdir)"
