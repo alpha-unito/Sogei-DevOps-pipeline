@@ -4,3 +4,18 @@ dataset:
 dataset_private:
   class: Directory
   path: #path to the private dataset
+epochs: 20
+learning_rate: 
+  class: File #Valore: Costante, Esponenziale decrescente, Lambda function
+  path: #path
+optimizer: 
+  class: File  #valore: SGD, Adam
+  path:
+batch_size: [4, 8]
+metrics: 
+  class: File  #Validation loss, Precision, F1-score
+  path:
+augmentation: 
+  class: File   #Horizontal flip, Flip, Random brightness, Rotation90
+  path:
+l2_egulator: 0.005
