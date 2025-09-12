@@ -1,0 +1,10 @@
+train_script:
+  class: File
+  path: /Users/dorianaunito/PostDoc/PROJECTS/SOGEI-DevOps/venv/building-footprint-segmentation/examples/example-epoch-batch.py
+
+end_epochs: [1,2]
+batch_sizes: [2,4]
+#output_dir: /Users/dorianaunito/PostDoc/PROJECTS/SOGEI-DevOps/venv/building-footprint-segmentation/cwl
+choose_best_script:
+  class: File
+  path: /Users/dorianaunito/PostDoc/PROJECTS/SOGEI-DevOps/venv/building-footprint-segmentation/examples/calculating_best1.py

@@ -1,0 +1,20 @@
+#!/usr/bin/env streamflow
+version: v1.0
+workflows:
+  master:
+    type: cwl
+    config:
+      file: cwl/main-unito.cwl
+      settings: cwl/config-endepoch2.yml
+#     bindings:
+#       - step: step1
+#         target: 
+#           deployment: NOME_della_machina
+#       - port: ???
+# deployments:
+#   NOME_della_machina:
+#     type: ssh
+#     config:
+#       ...
+#       sshKey:
+#       username:
